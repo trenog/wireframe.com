@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}G43 Tech Exercise | {{article.title}}{% endblock %}
+{% block main %}
+	<main class="main col-xs-12 col-sm-10" role="primary">
+		<article class="article full">
+		{% if article %}
+			<header>
+				<h1 class="article-title">{{article.title}}</h1>
+				<div class="pub-group">
+					<div class="pubdate">{{article.pub_date|date:"l, F j, Y"}}</div>
+					<div class="author"><a href="#">{{article.author}}</a></div>
+				</div>
+			</header>
+			<section>
+				<div class="hero-img"><img src="{% url 'g43:media' article.hero_image %}" alt="hero_img"/></div>
+				<div class="full article-body">{{article.body_text|linebreaks}}</div>
+				<div class="extra-img"><img src="{% url 'g43:media' article.optional_image %}"/></div>
+			</section>
+		{% else %}
+			<header>
+				<h1 class="article-title">Article Title</h1>
+				<div class="pub-group">
+					<div class="pubdate">Published: Date</div>
+					<div class="author"><a href="#">Author Name</a></div>
+				</div>
+			</header>
+			<section>
+				<div class="hero-img"><img src="" alt="hero_img"/></div>
+				<div class="full article-body">Article Body</div>
+				<div class="extra-img"><img src="" alt="extra_img"/></div>
+			</section>		
+		{% endif %}
+		</article>
+	</main>
+{% endblock %}

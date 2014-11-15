@@ -1,0 +1,25 @@
+	<nav id="sidebar" class="nav col-xs-12 col-sm-2" role="navigation">		
+		<div class="site-icon"></div>
+		<div class="nav-group">
+			<a href="{% url 'g43:index' %}"><div class="menu-icon"></div></a>
+			<div class="search-icon"></div>
+		</div>
+		<ul class="nav-links">
+		{% if not all_articles %}
+			{% for article in all_articles %}
+			<li>
+				<a href="{% url 'g43:detail' article.article_id %}">
+					<div class="nav-img"></div>
+					{{article.title}}
+				</a>
+			</li>
+			{% endfor %}	
+		{% else %}
+			<li><a href="#"><div class="nav-img"></div>Nav 1</a></li>
+			<li><a href="#"><div class="nav-img"></div>Nav 2</a></li>
+			<li><a href="#"><div class="nav-img"></div>Nav 3</a></li>
+			<li><a href="#"><div class="nav-img"></div>Nav 4</a></li>
+			<li><a href="#"><div class="nav-img"></div>Nav 5</a></li>
+		{% endif %}			
+		</ul>
+	</nav>

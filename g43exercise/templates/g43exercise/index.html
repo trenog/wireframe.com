@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% load random_article %}
+{% block main %}
+	<main class="main col-xs-12 col-sm-10" role="primary">
+		<article class="article preview">
+		{% get_random_article as article_preview %}
+		{% if article_preview %}
+			<header>
+				<h1 class="article-title">{{ article_preview.title }}</h1>
+				<div class="pub-group">
+					<div class="pubdate">{{article_preview.pub_date|date:"l, F j, Y"}}</div>
+					<div class="author"><a href="#">{{ article_preview.author }}</a></div>
+				</div>
+			</header>
+			<section>
+				<div class="hero-img"><img src="{% url 'g43:media' article_preview.hero_image %}" alt="hero_img"/></div>
+				<p class="article-body">{{ article_preview.body_text|truncatewords:150 }}  <a href="{% url 'g43:detail' article_preview.article_id %}" class="article-link">Read More</a></p>
+			</section>
+		{% else %}			
+			<header>
+				<h1 class="article-title">Article Title</h1>
+				<div class="pub-group">
+					<div class="pubdate">Published: Date</div>
+					<div class="author"><a href="#">Author Name</a></div>
+				</div>
+			</header>
+			<section>
+				<div class="hero-img"><img src="" alt="hero_img"/></div>
+				<p class="article-body">Article Body  <a href="#" class="article-link">Read More</a></p>
+			</section>
+		{% endif %}
+		</article>
+		<div class="top-articles">
+			<ol class="article-list">
+			{% if all_articles %}
+				{% for article in all_articles %}
+				<li>
+					<h2 class="article-title">{{article.title}}</h2>
+					<div class="article-body">{{article.body_text|truncatewords:50}}</div>
+					<a href="{% url 'g43:detail' article.article_id %}" class="article-link">Call to Action</a>
+				</li>
+				{% endfor %}	
+			{% else %}
+				<li>
+					<h2 class="article-title">List Title One</h2>
+					<div class="article-body">Article Body 1</div>
+					<a href="" class="article-link">Call to Action</a>
+				</li>
+				<li>
+					<h2 class="article-title">List Title Two</h2>
+					<div class="article-body">Article Body 2</div>
+					<a href="" class="article-link">Call to Action</a>
+				</li>
+				<li>
+					<h2 class="article-title">List Title Three</h2>
+					<div class="article-body">Article Body 3</div>
+					<a href="" class="article-link">Call to Action</a>
+				</li>				
+			{% endif %}
+			</ol>
+		</div>
+	</main>
+{% endblock %}
